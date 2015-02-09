@@ -27,3 +27,16 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Fy9jGwyWhp9ir2Zil0848B1o0IUC5dH4PRB/v7V66h0GqiOtPyf1JkBQySUc67wTqDGgEF0+K5J06q25Dcr6vXWV6b12gUw5RzoYbsp7wyq3cxf7G+bL2RYJJ3Cs/cxfUhAQixl4UgsWS2avVou1nMXWB679p8mQRksb9D/AbVI=
+  file_glob: true
+  file: FLCore_*.*
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: flr/FLCore
+    branch: master
