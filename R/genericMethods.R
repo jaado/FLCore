@@ -710,10 +710,6 @@ setGeneric("distribution", function(object, ...)
 setGeneric("distribution<-", function(object, ..., value)
 	standardGeneric("distribution<-"))
 
-# combine
-setGeneric('combine', function(x, y, ...)
-  standardGeneric('combine'))
-
 # jackknife
 setGeneric("jackknife", function(object, ...)
 	standardGeneric("jackknife"))

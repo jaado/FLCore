@@ -1076,32 +1076,6 @@ function(x, row.names, cohort=FALSE, timestep=FALSE, date=FALSE, drop=FALSE) {
   }
 ) # }}}
 
-# combine {{{
-setMethod('combine', signature(x='FLQuant', y='FLQuant'),
-  function(x, y) {
-
-    dx <- dim(x)
-    dy <- dim(y)
-
-    # dim(x)[1:5] == dim(x)[1:5]
-    if(any(dx[-6] != dy[-6]))
-      stop("Object dimensions [1:5] must match")
-
-    #
-    if(!all.equal(dimnames(x)[1:5], dimnames(y)[1:5]))
-      warning("dimnames of x and y differ")
-
-    itx <- dx[6]
-    ity <- dy[6]
-
-    res <- FLQuant(NA, dimnames=c(dimnames(x)[1:5], list(iter=seq(itx + ity))),
-      units=units(x))
-    res[,,,,,1:itx] <- x
-    res[,,,,,(itx+1):(itx+ity)] <- y
-    return(res)
-  }
-) # }}}
-
 ## show     {{{
 setMethod("show", signature(object="FLQuant"),
 	function(object){

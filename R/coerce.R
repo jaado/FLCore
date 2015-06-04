@@ -118,7 +118,7 @@ setAs('data.frame', 'FLStock',
         names(lst) <- slots
 
         for(i in slots) {
-            lst[[i]] <- as.FLQuant(subset(from, slot==i, select=-slot))
+            lst[[i]] <- as(subset(from, slot==i, select=-slot), 'FLQuant')
         }
 
         return(do.call('FLStock', lst))

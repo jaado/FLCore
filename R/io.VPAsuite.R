@@ -86,9 +86,7 @@ readVPA <- function(file, sep = "", quiet=TRUE) {
         if (file.exists(i)) {
             a.   <-  readVPAFile(i, sep=sep, quiet=quiet)
 
-            switch(
-									 as.character(scan(i, skip = 1, nlines = 1, sep = sep, comment.char='#', quiet=TRUE)[2])
-									 ,
+            switch(as.character(scan(i, skip = 1, nlines = 1, sep = sep, comment.char='#', quiet=TRUE)[2]),
             "1" = FLStock.@landings    <-a.,
             "2" = FLStock.@landings.n  <-a.,
             "3" = FLStock.@landings.wt <-a.,

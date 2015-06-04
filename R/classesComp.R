@@ -494,20 +494,21 @@ setClass("FLBiol",
 		m        ="FLQuant",
 		wt       ="FLQuant",
 		fec      ="FLQuant",
-		spwn     ="FLQuant"
+		spwn     ="FLQuant",
+		model    ="formula",
+		params   ="FLPar"
       ),
 	prototype=prototype(
-		range    =unlist(list(min=NA, max=NA, plusgroup=NA, minyear=1, maxyear=1)),
+		range    = unlist(list(min=NA, max=NA, plusgroup=NA, minyear=1, maxyear=1)),
     n        = FLQuant(),
 		m        = FLQuant(),
 		wt       = FLQuant(),
 		fec      = FLQuant(),
-		spwn     = FLQuant()),
-	validity=validFLBiol
+		spwn     = FLQuant(),
+    model    = formula(NULL)),
+	validity   = validFLBiol
 )
 
-setValidity("FLBiol", validFLBiol)
-remove(validFLBiol)	# We do not need this function any more
 invisible(createFLAccesors("FLBiol", exclude=c('name', 'desc', 'range'))) # }}}
 
 # FLI    {{{

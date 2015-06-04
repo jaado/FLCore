@@ -292,26 +292,6 @@ setMethod("bubbles", signature(x="formula", data ="FLQuants"), function(x, data,
 
 })  # }}}
 
-# combine {{{
-setMethod('combine', signature(x='FLQuants', y='missing'),
-  function(x) {
-
-    ln <- length(x)
-    dm <- matrix(unlist(lapply(x, dim)), ncol=6, nrow=ln, byrow=TRUE)
-
-    # dim(...)[1:5] == dim(...)[1:5]
-    if(any(apply(dm[,1:5], 1, function(x) x/dm[1,1:5]) != 1))
-      stop("Object dimensions [1:5] must match")
-
-    its <- dm[,6]
-
-    res <- FLQuant(unlist(x), dimnames=c(dimnames(x[[1]])[1:5], list(iter=seq(sum(its)))),
-      units=units(x[[1]]))
-
-    return(res)
-  }
-) # }}}
-
 # Sums(FLQuants)	{{{
 setMethod('Sums', signature(object='FLQuants'),
 	function(object, na.rm=FALSE, ...) {
@@ -326,3 +306,13 @@ setMethod('Products', signature(object='FLQuants'),
 		eval(parse(text=paste('object[[', paste(seq(length(object)),
 			collapse=']] * object[['), ']]', sep='')))
 )	# }}}
+
+## Arith    {{{
+setMethod("Arith", ##  "+", "-", "*", "^", "%%", "%/%", "/"
+	signature(e1 = "FLQuants", e2 = "FLQuants"),
+	function(e1, e2) {
+		for(i in seq(length(e1)))
+			e1[[i]] <- callGeneric(e1[[i]], e2[[i]])
+		return(e1)
+	}
+)
